@@ -225,10 +225,109 @@ body {
     margin-bottom: 100px;
 }
 
-
 @media screen and (min-width: 600px) {
     .action-area {
         align-items: center;
         flex-direction: row;
     }
+}
+
+/** Masonry Layout **/
+
+.section.masonry {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.brick {
+    grid-column: span 1;
+}
+
+.brick.double {
+    grid-column: span 2;
+}
+
+.brick.triple {
+    grid-column: span 3;
+}
+
+/* Tablet layout */
+@media (max-width: 1024px) {
+    .section.masonry {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .brick,
+    .brick.double,
+    .brick.triple {
+        grid-column: span 2;
+    }
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+    .section.masonry {
+        grid-template-columns: 1fr;
+    }
+
+    .brick,
+    .brick.double,
+    .brick.triple {
+        grid-column: span 1;
+    }
+}
+
+/** End Masonry Layout **/
+
+/** Animations for toggle answer feature **/
+.question:not(.expanded)::after {
+    transition: transform 1s ease-out;
+}
+
+.faq .question.expanded::after {
+    content: '';
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid;
+    border-right: 2px solid;
+    transform: rotate(130deg);
+    right: 12px;
+    top: 36px;
+    transition: transform 1s ease-out;
+}
+
+
+.answer.hidden {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1s ease-out;
+}
+
+.answer:not(.hidden) {
+    overflow: hidden;
+    max-height: 400px; 
+    transition: max-height 1s ease-out;
+}
+
+.question:hover {
+    cursor: pointer;
+}
+
+/** End Animations for toggle answer feature **/
+
+/** Bottom fixed banner **/
+.banner:not(.banner-visible) {
+    height: 0px;
+}
+
+.banner-visible {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-height:100px;
+    transition: max-height 3s ease-out;
 }
